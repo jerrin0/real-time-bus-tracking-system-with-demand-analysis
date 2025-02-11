@@ -1,0 +1,52 @@
+
+#Coding to import Libraries and data:
+import pandas as pd
+import numpy
+data1 = pd.read_excel(r"your file path.xlsx")
+# {week,Day,Trip,stop1,stop2,stop3,stop4,stop5,total,avg,previousavg,bus count}dataset column.
+
+
+#Coding to analysis the data:
+data1
+data1.corr()["avg"]
+import seaborn as sea
+sea.lmplot(x="avg",y="bus count", data=data1,fit_reg=True, ci=None)
+data1.plot.hist(y="bus count")
+
+#Coding to split the dataset for training and testing:
+train=data1[data1["week"]<3].copy()
+test=data1[data1["week"]==3].copy()
+test1=data1[data1["week"]==4].copy()
+
+#Coding to import Linear Regression:
+from sklearn.linear_model import LinearRegression
+reg=LinearRegression()
+per=["Day","previousavg"]
+tar="avg"
+
+#Coding to train the modal:
+reg.fit(train[per],train["avg"])
+pred1=reg.predict(test[per])
+pred1
+test["predicitionavg"]=pred1
+test
+test["predicitionavg"]=test["predicitionavg"].round()
+test
+per=["Day","previousavg"]
+tar="avg"
+reg.fit(train[per],train["avg"])
+
+#Coding to predict the average passengers and number of buses:
+pred1=reg.predict(test1[per])
+test1["predicitionavg"]=pred1
+test1["predicitionavg"]=test1["predicitionavg"].round()
+test1
+per=["Day","predicitionavg"]
+tar="bus count"
+reg.fit(test[per],test["bus count"])
+pred=reg.predict(test1[per])
+pred
+test1["predicition"]=pred
+test1
+test1["predicition"]=test1["predicition"].round()
+test1
