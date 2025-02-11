@@ -1,4 +1,4 @@
-I face some problem with interfacing GPS to Pico W, so I used Arduino uno but it showed up perfectly with Arduino uno so I just changed to it. Your can use any one of your choice. Thank you! 
+I faced some problems interfacing a GPS module with the Raspberry Pi Pico W, so I switched to an Arduino Uno, where it worked perfectly. You can use either one based on your preference. Thank you!
 Here I used 
 Ir sensor - to count passenger,
 GPS module- for location,
